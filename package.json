@@ -4,6 +4,7 @@
   "description": "Adds event delegation and custom events to Brisky",
   "main": "lib/index.js",
   "scripts": {
+    "start": "watchify-server test/index.js",
     "test": "node test | tap-difflet",
     "watch": "nodemon test | tap-difflet",
     "cover": "istanbul cover --report none --print detail test/index.js",
@@ -37,6 +38,13 @@
     "Youri Daamen <youri@vigour.io>"
   ],
   "devDependencies": {
-    "vigour-doc": "^1.1.5"
+    "brisky-core": "github:vigour-io/brisky-core",
+    "coveralls": "^2.11.9",
+    "istanbul": "^0.4.3",
+    "nodemon": "^1.9.1",
+    "tap-difflet": "0.4.0",
+    "tape": "^4.4.0",
+    "vigour-doc": "^1.1.5",
+    "watchify-server": "^1.0.2"
   }
 }
