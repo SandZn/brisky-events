@@ -1,0 +1,42 @@
+{
+  "name": "brisky-events",
+  "version": "0.0.1",
+  "description": "Adds event delegation and custom events to Brisky",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "node test | tap-difflet",
+    "watch": "nodemon test | tap-difflet",
+    "cover": "istanbul cover --report none --print detail test/index.js",
+    "docs": "node_modules/vigour-doc/bin/vdoc",
+    "travis": "npm run cover -s && istanbul report lcov && ((cat coverage/lcov.info | coveralls) || exit 0)"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vigour-io/brisky-events.git"
+  },
+  "author": "vigour.io <dev@vigour.io>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vigour-io/brisky-events/issues"
+  },
+  "homepage": "https://github.com/vigour-io/brisky-events#readme",
+  "keywords": [
+    "reactive",
+    "state",
+    "element",
+    "DOM"
+  ],
+  "dependencies": {
+    "vigour-base": "^2.2.8",
+    "vigour-stamp": "^1.0.1",
+    "vigour-ua": "^1.0.3",
+    "vigour-util": "^2.0.10"
+  },
+  "contributors": [
+    "Jim de Beer <jim@vigour.io>",
+    "Youri Daamen <youri@vigour.io>"
+  ],
+  "devDependencies": {
+    "vigour-doc": "^1.1.5"
+  }
+}
