@@ -27,6 +27,9 @@
     "element",
     "DOM"
   ],
+  "browser": {
+    "./lib/listener": "./lib/listener/browser"
+  },
   "dependencies": {
     "vigour-base": "^2.2.8",
     "vigour-stamp": "^1.0.1",
@@ -38,7 +41,7 @@
     "Youri Daamen <youri@vigour.io>"
   ],
   "devDependencies": {
-    "brisky-core": "github:vigour-io/brisky-core",
+    "brisky-core": "0.0.1",
     "coveralls": "^2.11.9",
     "istanbul": "^0.4.3",
     "nodemon": "^1.9.1",
