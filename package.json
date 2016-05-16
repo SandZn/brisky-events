@@ -1,6 +1,6 @@
 {
   "name": "brisky-events",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Adds event delegation and custom events to Brisky",
   "main": "lib/index.js",
   "scripts": {
