@@ -15,6 +15,7 @@ test('adding basic events', function (t) {
   node = render(elem)
 
   t.true(elem.hasEvents, 'adds hasEvents on element')
+  console.log(node)
   t.equals(node._, elem, 'stores element on node')
   t.false('_s' in node, 'doesn\'t store state on node when no state')
 })
