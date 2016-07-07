@@ -55,6 +55,7 @@
     "Youri Daamen <youri@vigour.io>"
   ],
   "devDependencies": {
+    "parse-element": "^2.0.0",
     "brisky-core": "^1.1.1",
     "coveralls": "^2.11.9",
     "istanbul": "^0.4.3",
