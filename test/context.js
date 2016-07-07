@@ -2,7 +2,7 @@
 const render = require('brisky-core/render')
 const Element = require('brisky-core')
 const test = require('tape')
-const s = require('vigour-state')
+const s = require('vigour-state/s')
 Element.prototype.inject(require('../lib'))
 
 test('context - fire events - restore context', function (t) {
