@@ -63,6 +63,7 @@
     "standard": "^7.0.1",
     "tap-difflet": "0.4.0",
     "tape": "^4.4.0",
+    "vigour-state": "^4.3.0",
     "vigour-doc": "^1.1.5",
     "watchify-server": "^1.0.2"
   }
