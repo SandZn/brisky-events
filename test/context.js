@@ -8,7 +8,7 @@ const trigger = require('../trigger')
 Element.prototype.inject(require('../lib'))
 
 test('context - fire events - restore context', function (t) {
-  t.plan(1)
+  t.plan(2)
   const state = s({
     clients: {
       child: {
@@ -23,6 +23,9 @@ test('context - fire events - restore context', function (t) {
     }
   })
 
+  const cool = state.clients.child.prototype.cool
+  const orig = cool.path()
+
   const app = render({
     types: {
       a: {
@@ -31,7 +34,7 @@ test('context - fire events - restore context', function (t) {
         on: {
           mousedown (event, stamp) {
             t.equal('state' in event, true, 'has state in event')
-            console.log(event.state.parent.b.cool.path())
+            t.same(event.state.cool.path(), [ 'clients', 'a', 'cool' ], 'sets context')
           }
         }
       }
@@ -39,5 +42,9 @@ test('context - fire events - restore context', function (t) {
     a: { type: 'a' }
   }, state)
   trigger(app.childNodes[0], 'mousedown')
+
+  console.log(cool.path(), orig)
+  // definitely wrong
+
   console.log(p(app))
 })
