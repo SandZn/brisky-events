@@ -38,8 +38,6 @@ test('context - fire events - restore context', function (t) {
     },
     a: { type: 'a' }
   }, state)
-
   trigger(app.childNodes[0], 'mousedown')
-
   console.log(p(app))
 })

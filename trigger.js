@@ -1,9 +1,7 @@
 'use strict'
-const fireEvent = require('./lib/fire')
-
-module.exports = function trigger (node, type) {
-  if (!node._) {
-    throw new Error(`cannot find brisky-event on node for "${type}"`)
+module.exports = function trigger (node, type, event) {
+  if (!event) {
+    event = new global.Event(type)
   }
-  // node._.emit(type, node)
+  node.dispatchEvent(event)
 }
