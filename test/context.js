@@ -3,9 +3,11 @@ const render = require('brisky-core/render')
 const Element = require('brisky-core')
 const test = require('tape')
 const s = require('vigour-state/s')
-// const p = require('parse-element')
-const trigger = require('../trigger')
-Element.prototype.inject(require('../lib'))
+const trigger = require('../trigger') // may just use dispatch event
+Element.prototype.inject(
+  require('../lib'),
+  require('../lib/basic')
+)
 
 test('context - fire events - restore context', function (t) {
   const state = s({
@@ -21,14 +23,13 @@ test('context - fire events - restore context', function (t) {
       }
     }
   })
-
   const app = render({
     types: {
       a: {
         $: 'clients.a.cool',
         text: { $: 'text' },
         on: {
-          mousedown (event, stamp) {
+          down (event, stamp) {
             t.equal(
               'state' in event,
               true,
@@ -47,7 +48,6 @@ test('context - fire events - restore context', function (t) {
     a: { type: 'a' },
     b: { type: 'a', $: 'clients.b.cool' }
   }, state)
-
   t.same(
     app.childNodes[0]._sc,
     state.clients.a.cool.storeContext(),
@@ -60,7 +60,45 @@ test('context - fire events - restore context', function (t) {
     state.clients.b.cool.storeContext(),
     'has stored context on node "b"'
   )
-  trigger(app.childNodes[1], 'mousedown')
+  trigger(app.childNodes[1], 'touchstart')
   t.equal(app.childNodes[1]._sc, void 0, 'cleared stored context on node')
+  t.end()
+})
+
+test('context - top level change', function (t) {
+  const state = s({
+    child: {
+      things: {
+        are: {
+          good: true
+        }
+      }
+    },
+    a: {}
+  })
+
+  const app = render({
+    field: {
+      $: 'a.things.are.good',
+      on: {
+        down () {}
+      }
+    }
+  }, state)
+
+  t.same(
+    app.childNodes[0]._sc,
+    state.a.things.are.good.storeContext(),
+    'correct stored context'
+  )
+
+  state.a.things.set('lulz')
+
+  t.same(
+    app.childNodes[0]._sc,
+    state.a.things.are.good.storeContext(),
+    'correct stored context after top level context resolve'
+  )
+
   t.end()
 })
