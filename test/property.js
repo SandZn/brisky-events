@@ -4,7 +4,7 @@ const render = require('brisky-core/render')
 const s = require('vigour-state/s')
 const Element = require('brisky-core')
 
-test('events', (t) => {
+test('property', (t) => {
   const state = s({ something: true })
   const elem = new Element({
     node: {
@@ -18,7 +18,7 @@ test('events', (t) => {
   t.end()
 })
 
-test('events - deep', (t) => {
+test('property - deep', (t) => {
   const state = s({ something: true })
   const elem = new Element({
     node: {
@@ -36,7 +36,7 @@ test('events - deep', (t) => {
   t.end()
 })
 
-test('events - reference', (t) => {
+test('property - reference', (t) => {
   const state = s({
     a: { field: true },
     b: { field: true },
@@ -53,8 +53,6 @@ test('events - reference', (t) => {
   })
   const app = render(elem, state)
   t.equal(app.childNodes[0].childNodes[0]._s, state.a.field, 'correct state on node')
-
-  console.log('lets go')
   state.something.set('$root.b')
   t.equal(app.childNodes[0].childNodes[0]._s, state.b.field, 'correct state on node after set')
   t.end()

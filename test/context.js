@@ -8,7 +8,6 @@ const trigger = require('../trigger')
 Element.prototype.inject(require('../lib'))
 
 test('context - fire events - restore context', function (t) {
-  // t.plan(3)
   const state = s({
     clients: {
       child: {
@@ -23,8 +22,6 @@ test('context - fire events - restore context', function (t) {
     }
   })
 
-  // const cool = state.clients.child.prototype.cool
-  // const orig = cool.path()
   const app = render({
     types: {
       a: {
@@ -32,20 +29,38 @@ test('context - fire events - restore context', function (t) {
         text: { $: 'text' },
         on: {
           mousedown (event, stamp) {
-            t.equal('state' in event, true, 'has state in event')
-            console.log(event.state.path())
-            // how to solve how to solve -- context is walker in state not in event
-            // what do we need/want
-            // dont realy no the problem where trying to solve here...
+            t.equal(
+              'state' in event,
+              true,
+              `has state in event for "${this.key}"`
+            )
+            t.same(
+              event.state.path(),
+              [ 'clients', this.key, 'cool' ],
+              `correct path for "${this.key}"`
+            )
+            event.state.set(false)
           }
         }
       }
     },
-    a: { type: 'a' }
+    a: { type: 'a' },
+    b: { type: 'a', $: 'clients.b.cool' }
   }, state)
+
+  t.same(
+    app.childNodes[0]._sc,
+    state.clients.a.cool.storeContext(),
+    'has stored context on node "a"'
+  )
   trigger(app.childNodes[0], 'mousedown')
+  t.equal(app.childNodes[0]._sc, void 0, 'cleared stored context on node')
+  t.same(
+    app.childNodes[1]._sc,
+    state.clients.b.cool.storeContext(),
+    'has stored context on node "b"'
+  )
+  trigger(app.childNodes[1], 'mousedown')
+  t.equal(app.childNodes[1]._sc, void 0, 'cleared stored context on node')
   t.end()
 })
-
-// this is not what its about just need to store and set the correct _c -- i know we just add an attach listener -- that will solve all -- only need it when there is a change in __c
-// lets check perf impacts
