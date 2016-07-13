@@ -3,7 +3,7 @@ const render = require('brisky-core/render')
 const Element = require('brisky-core')
 const test = require('tape')
 const s = require('vigour-state/s')
-const trigger = require('../trigger') // may just use dispatch event
+const trigger = require('../trigger')
 Element.prototype.inject(
   require('../lib'),
   require('../lib/basic')
