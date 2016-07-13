@@ -61,7 +61,7 @@ test('basic - up, move, down', (t) => {
   t.end()
 })
 
-test('basic - remove event from instance', (t) => {
+test('basic - remove events', (t) => {
   const elem = new Element({
     types: {
       simple: { tag: 'simple', on: { down () {} } }
@@ -69,9 +69,27 @@ test('basic - remove event from instance', (t) => {
     a: {
       type: 'simple',
       on: null
-      // on: { down: null }
+    },
+    b: {
+      type: 'simple',
+      on: {
+        down: null
+      }
+    },
+    c: {
+      type: 'simple',
+      on: {
+        up: true,
+        down: null
+      }
     }
   })
-  console.log(elem.a)
+
+  t.equal(elem.a.hasEvents, null, 'removed hasEvents from "elem.a"')
+  t.equal(elem.b.hasEvents, null, 'removed hasEvents from "elem.b"')
+  t.ok(elem.c.hasEvents !== null, '"elem.c" has events')
+
+  // no non context
+
   t.end()
 })
