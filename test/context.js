@@ -92,7 +92,9 @@ test('context - top level change', function (t) {
     'correct stored context'
   )
 
+  // has to resolve till are, good
   state.a.things.set('lulz')
+  trigger(app.childNodes[0], 'mousedown')
 
   t.same(
     app.childNodes[0]._sc,
