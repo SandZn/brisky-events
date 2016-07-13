@@ -76,7 +76,6 @@ test('context - top level change', function (t) {
     },
     a: {}
   })
-
   const app = render({
     field: {
       $: 'a.things.are.good',
@@ -85,22 +84,31 @@ test('context - top level change', function (t) {
       }
     }
   }, state)
-
   t.same(
     app.childNodes[0]._sc,
     state.a.things.are.good.storeContext(),
     'correct stored context'
   )
-
-  // has to resolve till are, good
   state.a.things.set('lulz')
   trigger(app.childNodes[0], 'mousedown')
-
   t.same(
     app.childNodes[0]._sc,
     state.a.things.are.good.storeContext(),
     'correct stored context after top level context resolve'
   )
+  t.same(
+    app.childNodes[0]._s,
+    state.a.things.are.good,
+    'correct state after top level context resolve'
+  )
 
+  state.a.remove()
+  trigger(app.childNodes[0], 'mousedown')
+
+  t.same(
+    app.childNodes[0]._s,
+    null,
+    'correct stored context after top level context remove'
+  )
   t.end()
 })

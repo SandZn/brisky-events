@@ -26,12 +26,13 @@ render({
   }
 }, state)
 
-perf(function baseLine () {
-  for (let i = 0; i < amount; i++) {
-  }
-}, function event () {
+function event () {
   const good = state.a.things.are.good
   for (let i = 0; i < amount; i++) {
-    good.set(i)
+    good.emit('data', i)
   }
-})
+}
+
+function context () {}
+
+perf(context, event)
