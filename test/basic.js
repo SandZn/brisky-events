@@ -61,10 +61,27 @@ test('basic - up, move, down', (t) => {
   t.end()
 })
 
-test('basic - remove events', (t) => {
+test('basic - remove', (t) => {
+  var remove = 0
+  var create = 0
   const elem = new Element({
     types: {
-      simple: { tag: 'simple', on: { down () {} } }
+      simple: { on: { down () {} } },
+      custom: {
+        on: {
+          properties: {
+            hello: {
+              createEvent () {
+                create++
+              },
+              removeEvent () {
+                remove++
+              }
+            }
+          },
+          hello () {}
+        }
+      }
     },
     a: {
       type: 'simple',
@@ -82,14 +99,25 @@ test('basic - remove events', (t) => {
         up: true,
         down: null
       }
+    },
+    d: {
+      type: 'custom',
+      on: {
+        hello: null
+      }
+    },
+    e: {
+      type: 'custom',
+      on: {
+        field: {}
+      }
     }
   })
-
   t.equal(elem.a.hasEvents, null, 'removed hasEvents from "elem.a"')
   t.equal(elem.b.hasEvents, null, 'removed hasEvents from "elem.b"')
   t.ok(elem.c.hasEvents !== null, '"elem.c" has events')
-
-  // no non context
-
+  t.equal(remove, 1, 'fired removeEvent for custom event')
+  t.equal(create, 1, 'fired createEvent for custom event')
+  t.equal(elem.b.hasEvents, null, 'removed hasEvents from "elem.e"')
   t.end()
 })
