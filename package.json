@@ -4,7 +4,7 @@
   "description": "Adds event delegation and custom events to Brisky",
   "main": "lib/index.js",
   "scripts": {
-    "performance": "budo ./test/performance -p 8080 --live",
+    "perf": "budo ./test/performance -p 8080 --live",
     "test": "(ducktape; node test) | tap-difflet && standard",
     "watch": "nodemon test | tap-difflet",
     "cover": "istanbul cover --report none --print detail test/index.js",
