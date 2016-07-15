@@ -10,6 +10,7 @@ Element.prototype.inject(
 
 test('basic - add events', (t) => {
   const elem = new Element({
+    isWidget: true,
     on: { mousedown () {} }
   })
   const node = render(elem)
