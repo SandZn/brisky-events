@@ -57,7 +57,7 @@
   "devDependencies": {
     "budo": "^8.2.2",
     "ducktape": "^1.0.0",
-    "parse-element": "^2.0.0",
+    "parse-element": "^2.0.3",
     "brisky-core": "^1.6.2",
     "coveralls": "^2.11.9",
     "istanbul": "^0.4.3",
