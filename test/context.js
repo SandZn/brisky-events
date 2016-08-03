@@ -4,6 +4,8 @@ const Element = require('brisky-core')
 const test = require('tape')
 const s = require('vigour-state/s')
 const trigger = require('../trigger')
+const isNode = require('vigour-util/is/node')
+
 Element.prototype.inject(
   require('../lib'),
   require('../lib/basic')
@@ -48,6 +50,11 @@ test('context - fire events - restore context', function (t) {
     a: { type: 'a' },
     b: { type: 'a', $: 'clients.b.cool' }
   }, state)
+
+  if (!isNode) {
+    document.body.appendChild(app)
+  }
+
   t.same(
     app.childNodes[0]._sc,
     state.clients.a.cool.storeContext(),
@@ -84,6 +91,11 @@ test('context - top level change', function (t) {
       }
     }
   }, state)
+
+  if (!isNode) {
+    document.body.appendChild(app)
+  }
+
   t.same(
     app.childNodes[0]._sc,
     state.a.things.are.good.storeContext(),
