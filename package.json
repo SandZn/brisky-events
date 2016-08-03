@@ -7,6 +7,7 @@
     "perf": "budo ./test/performance -p 8080 --live",
     "test": "(ducktape; node test) | tap-difflet && standard",
     "watch": "nodemon test | tap-difflet",
+    "watch-browser": "budo ./test/index.js:bundle.js -d ./test --css test/bundle.css --pushstate --live -- -r ./package.json:package.json",
     "cover": "istanbul cover --report none --print detail test/index.js",
     "docs": "node_modules/vigour-doc/bin/vdoc",
     "travis": "npm run cover -s && istanbul report lcov && ((cat coverage/lcov.info | coveralls) || exit 0) && standard"
@@ -57,7 +58,7 @@
   "devDependencies": {
     "budo": "^8.2.2",
     "ducktape": "^1.0.0",
-    "parse-element": "^2.0.3",
+    "parse-element": "^2.0.4",
     "brisky-core": "^1.6.2",
     "coveralls": "^2.11.9",
     "istanbul": "^0.4.3",
@@ -67,7 +68,6 @@
     "vigour-performance": "^1.0.0",
     "tap-difflet": "0.4.0",
     "tape": "^4.4.0",
-    "vigour-state": "^4.3.0",
-    "vigour-doc": "^1.1.5"
+    "vigour-state": "^4.3.0"
   }
 }

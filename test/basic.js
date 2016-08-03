@@ -3,6 +3,8 @@ const render = require('brisky-core/render')
 const Element = require('brisky-core')
 const test = require('tape')
 const trigger = require('../trigger')
+const isNode = require('vigour-util/is/node')
+
 Element.prototype.inject(
   require('../lib'),
   require('../lib/basic')
@@ -36,6 +38,9 @@ test('basic - prevent', (t) => {
     }
   }
   const app = render(elem)
+  if (!isNode) {
+    document.body.appendChild(app)
+  }
   trigger(app.childNodes[0], 'mousedown')
   t.ok('prevent events')
   t.end()
@@ -54,6 +59,9 @@ test('basic - up, move, down', (t) => {
         cnt++
       }}
     })
+    if (!isNode) {
+      document.body.appendChild(app)
+    }
     for (let i in cases[type]) {
       trigger(app, cases[type][i])
     }
