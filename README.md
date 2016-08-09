@@ -7,7 +7,7 @@
 ```javascript
 const Brisky = require('brisky-core')
 Brisky.prototype.inject(require('brisky-events'))
-const render = require('brisky-core/render)
+const render = require('brisky-core/render')
 
 const app = render({
   on: {
