@@ -5,9 +5,7 @@
 [![Coverage Status](https://coveralls.io/repos/github/vigour-io/brisky-events/badge.svg?branch=master)](https://coveralls.io/github/vigour-io/brisky-events?branch=master)
 
 ```javascript
-const Brisky = require('brisky-core')
-Brisky.prototype.inject(require('brisky-events'))
-const render = require('brisky-core/render')
+const render = require('brisky/render')
 
 const app = render({
   on: {
