@@ -6,8 +6,8 @@
   "scripts": {
     "perf": "budo ./test/performance -p 8080 --live",
     "test": "(ducktape; node test) | tap-difflet && standard",
-    "watch": "nodemon test | tap-difflet",
-    "watch-browser": "budo ./test/index.js:bundle.js -d ./test --css test/bundle.css --pushstate --live -- -r ./package.json:package.json",
+    "dev": "nodemon test | tap-difflet",
+    "dev-browser": "budo ./test/index.js:bundle.js -d ./test --css test/bundle.css --pushstate --live -- -r ./package.json:package.json",
     "cover": "istanbul cover --report none --print detail test/index.js",
     "docs": "node_modules/vigour-doc/bin/vdoc",
     "travis": "npm run cover -s && istanbul report lcov && ((cat coverage/lcov.info | coveralls) || exit 0) && standard"
