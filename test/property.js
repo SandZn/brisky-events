@@ -25,6 +25,7 @@ test('property - deep', (t) => {
       $: 'something',
       hello: {
         bla: {
+          $: true,
           hasEvents: true
         }
       }
