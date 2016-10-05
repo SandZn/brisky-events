@@ -75,7 +75,9 @@ test('basic - remove', (t) => {
   var create = 0
   const elem = new Element({
     types: {
-      simple: { on: { down () {} } },
+      simple: {
+        on: { down () {} }
+      },
       custom: {
         on: {
           properties: {
@@ -128,5 +130,32 @@ test('basic - remove', (t) => {
   t.equal(remove, 1, 'fired removeEvent for custom event')
   t.equal(create, 1, 'fired createEvent for custom event')
   t.equal(elem.b.hasEvents, null, 'removed hasEvents from "elem.e"')
+  t.end()
+})
+
+test('remove - fire events for context', function (t) {
+  let count = 0
+  const app = render({
+    types: {
+      a: {
+        nested: {},
+        on: {
+          mousedown: () => count++
+        }
+      }
+    },
+    a: { type: 'a' },
+    b: { type: 'a', nested: null }
+  })
+
+  if (!isNode) {
+    document.body.appendChild(app)
+  }
+
+  trigger(app.childNodes[0], 'mousedown')
+  t.equal(count, 1, 'fired for a')
+  trigger(app.childNodes[1], 'mousedown')
+  t.equal(count, 2, 'fired for b')
+
   t.end()
 })
