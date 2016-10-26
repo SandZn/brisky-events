@@ -21,7 +21,7 @@ const app = render({
 
 By default all DOM events are caught and handled as expected. Some events are handled, as can be seen in this repository. Feel free to [add an issue here](https://github.com/vigour-io/brisky-events/issues), if you notice something is missing or not working as expected.
 
-To list a few normal events:
+#### Normal events:
 
 * [click](http://www.w3schools.com/jsref/event_onclick.asp)
 * [down](http://www.w3schools.com/jsref/event_onmousedown.asp)
@@ -29,7 +29,7 @@ To list a few normal events:
 * [hover](http://www.w3schools.com/jsref/event_onmouseover.asp)
 
 
-Special events:
+#### Special events:
 
 * [drag](http://www.w3schools.com/html/html5_draganddrop.asp)
 * rightclick
@@ -38,7 +38,7 @@ Special events:
 * forcechanged
 
 
-Keyboard events:
+#### Keyboard events:
 
 * arrowleft
 * arrowright
@@ -51,4 +51,3 @@ Keyboard events:
 * playbtn
 * forward
 * space
-
